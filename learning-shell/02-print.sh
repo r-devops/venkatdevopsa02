@@ -17,3 +17,5 @@ echo -e "\e[32m Hello World \e[0m, \e[31m Here we go \e[0m"
 # Blue    34
 # Magneta 35
 # Cyan    36 
+
+# sample text
