@@ -19,3 +19,12 @@ then
 else 
     echo  both the strings are not same 
 fi 
+
+file=/tmp/newfile
+
+if [ -f $file ]
+then 
+    echo file exists 
+else
+    echo file does not exits 
+fi         
