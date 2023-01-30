@@ -1,5 +1,5 @@
-# declare -i a
-a=11
+declare -i a
+a=10
 
 if [ $a -gt 10 ]
 then
