@@ -16,4 +16,6 @@ x="abC"
 if [ $x == "abc" ]
 then 
     echo yes both the strings are same 
+else 
+    echo  both the strings are not same 
 fi 
