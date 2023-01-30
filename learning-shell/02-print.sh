@@ -2,6 +2,8 @@ echo "Hello World"
 
 echo -e "\e[32m Hello World \e[0m"
 
+echo -e "\e[32m Hello World \e[0m, \e[31m Here we go \e[0m"
+
 ### Color print syntax 
 # -e to tell the script the you are using color codes 
 # \e[31m -> enable the color code 31
