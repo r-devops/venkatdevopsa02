@@ -11,7 +11,7 @@ else
     echo $a is equal to 10 
 fi         
 
-x="abc"
+x="abC"
 
 if [ $x == "abc" ]
 then 
