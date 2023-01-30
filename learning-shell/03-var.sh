@@ -6,3 +6,7 @@ var2=xyz
 var3=true 
 
 echo " the value of var1 is $var1"
+
+# command subs 
+DATE=$(date)
+echo "Todays date - $DATE"
