@@ -10,3 +10,10 @@ then
 else 
     echo $a is equal to 10 
 fi         
+
+x="abc"
+
+if [ $x == "abc" ]
+then 
+    echo yes both the strings are same 
+fi 
