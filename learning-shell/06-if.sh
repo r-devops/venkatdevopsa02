@@ -1,5 +1,5 @@
 declare -i a
-a=10
+a=2
 
 if [ $a -gt 10 ]
 then
