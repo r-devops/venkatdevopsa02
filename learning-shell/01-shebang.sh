@@ -10,7 +10,7 @@ hostname
 echo "----------- Here is the listing of files  ------------"
 ls -ltr
 
-echo "\e[31m ----------- Here is the date on the system ------------ \e[0m"
+echo  -e "\e[31m ----------- Here is the date on the system ------------ \e[0m"
 date 
 
 # Shell script is adding the manual commands in a order 
