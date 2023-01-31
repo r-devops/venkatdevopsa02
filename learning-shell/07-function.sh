@@ -1,17 +1,19 @@
 
 
-function ADD() {
-    add=$(($1+$2))
-    echo "--------------- This out put is from function ------------"
-    echo $add
+function SWAP() {
+    echo "This function is to swap the values of two varaiables"
+    var1=$(($a+$b))
+    a=$(($var1-$a))
+    b=$(($var1-$b))
 }
 
 
 a=2
 b=3
-ADD $a $b
+echo "value of a is $a - before swap "
+echo "value of b is $b - before swap "
+SWAP $a $b
+echo "value of a is $a"
+echo "value of b is $b"
 
 
-a=3
-b=4
-ADD $a $b
