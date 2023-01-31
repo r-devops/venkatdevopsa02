@@ -4,7 +4,8 @@
 # for $Pattern2 do below steps 
 
 
-system=$1
+system=windows
+
 
 case $system in 
     linux)
@@ -17,4 +18,3 @@ case $system in
     echo "Unknown system"
 esac    
 
-case windows
