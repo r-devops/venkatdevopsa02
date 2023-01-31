@@ -16,3 +16,5 @@ case $system in
     *)
     echo "Unknown system"
 esac    
+
+case windows
