@@ -4,7 +4,7 @@ x=" "
 
 for color in blue white orange black; do 
         echo todays color is $color 
-        x=$x$color   
+        x=$color$x
 
 done    
 
