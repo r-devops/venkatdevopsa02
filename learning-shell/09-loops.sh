@@ -15,5 +15,7 @@ a=10
 
 while [ $a -lt 15 ]; do 
     echo $a
+    a=$((a+1))
+    sleep 10 
 done 
 
