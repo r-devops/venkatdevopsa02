@@ -7,3 +7,5 @@ echo $* # All Arguments
 echo $@ # All Arguments 
 
 echo $# # How many arguments have been passed 
+
+echo $? # value will be 0 if success and non-zero - if failed 
