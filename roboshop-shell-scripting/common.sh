@@ -1,5 +1,41 @@
 
+
+Statuscheck() {
+    if [$1 -eq 0]; then 
+    echo -e status ="\e[32Sucess\e[0m"
+    else
+    echo -e status ="\e[31Failed\e[0m"
+    exit 1
+    fi 
+
+}
+
+
 APP_PREREQ() {
+
+    echo " validate whether roboshop user is alreday exists or not"
+    id roboshop &>>${LOG_FILE}
+
+    if [$? -ne 0]; then 
+    echo " adding user robohop to the VM "
+    useradd roboshop &>>${LOG_FILE}
+    Statuscheck $?
+    fi 
+
+    echo "Download ${COMPONENT} Application code"
+    curl -s -L -o /tmp/${COMPONENT}.zip "https://github.com/roboshop-devops-project/${COMPONENT}/archive/main.zip" &>>${LOG_FILE}
+    Statuscheck $?
+
+    echo " remove old content if exists - make the script compatable to re-run"
+    cd /home/roboshop && rm -rf ${COMPONENT}  &>>${LOG_FILE}
+    Statuscheck $?
+
+    echo "extract the application "
+    unzip /tmp/${COMPONENT}.zip &>>${LOG_FILE}
+    Statuscheck $?
+
+
+    mv ${COMPONENT}-main ${COMPONENT}
 
 }
 
@@ -12,7 +48,19 @@ NODEJS() {
     curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${LOG_FILE}
     Statuscheck $?
     
-    yum install nodejs -y
+    echo "Install Nodejs "
+    yum install nodejs -y &>>${LOG_FILE}
+    Statuscheck $?
+
+    APP_PREREQ
+    
+    echo "Install NodeJs dependencies"
+    cd /home/roboshop
+    cd  ${COMPONENT}
+    npm install &>>${LOG_FILE}
+    Statuscheck $?
+
+    SYSTEMD_SETUP
 
 
 }
