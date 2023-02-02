@@ -1,10 +1,10 @@
 
 ID=$(id -u)
 
-#if [ $ID -ne 0 ]; then 
-#    echo "you are not running as root and this will fail"
-#    exit 1
-#fi     
+if [ $ID -ne 0 ]; then 
+    echo "you are not running as root and this will fail"
+    exit 1
+fi     
 
 
 Statuscheck() {
@@ -94,7 +94,24 @@ NODEJS() {
 
 }
 
-#JAVA() {}
+JAVA() {
+
+    echo "Install maven"
+    yum install maven -y &>>${LOG_FILE}
+    Statuscheck $?
+
+    APP_PREREQ
+
+    echo " Installing the dependencies "
+    cd /home/roboshop
+    cd ${COMPONENT}
+    mvn clean package  &>>${LOG_FILE}
+    mv target/${COMPONENT}-1.0.jar ${COMPONENT}.jar  &>>${LOG_FILE}
+    Statuscheck $?
+
+    SYSTEMD_SETUP
+
+}
 
 #PYTHON() {}
 
