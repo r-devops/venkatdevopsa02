@@ -1,14 +1,14 @@
 
 ID=$(id -u)
 
-if [ID -ne 0]; then 
+if [ $ID -ne 0]; then 
     echo "you are not running as root and this will fail"
     exit 1
 fi     
 
 
 Statuscheck() {
-    if [$1 -eq 0]; then 
+    if [ $1 -eq 0 ]; then 
     echo -e status ="\e[32Sucess\e[0m"
     else
     echo -e status ="\e[31Failed\e[0m"
@@ -23,7 +23,7 @@ APP_PREREQ() {
     echo " validate whether roboshop user is alreday exists or not"
     id roboshop &>>${LOG_FILE}
 
-    if [$? -ne 0]; then 
+    if [ $? -ne 0 ]; then 
     echo " adding user robohop to the VM "
     useradd roboshop &>>${LOG_FILE}
     Statuscheck $?
@@ -91,7 +91,7 @@ NODEJS() {
 
 }
 
-JAVA () {
+JAVA() {
 
 }
 
