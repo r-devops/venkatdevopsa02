@@ -1,4 +1,11 @@
 
+ID=$(id -u)
+
+if [ID -ne 0]; then 
+    echo "you are not running as root and this will fail"
+    exit 1
+fi     
+
 
 Statuscheck() {
     if [$1 -eq 0]; then 
