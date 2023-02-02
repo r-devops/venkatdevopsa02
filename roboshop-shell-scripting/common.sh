@@ -94,7 +94,7 @@ NODEJS() {
 
 }
 
-JAVA() {
+MAVEN() {
 
     echo "Install maven"
     yum install maven -y &>>${LOG_FILE}
