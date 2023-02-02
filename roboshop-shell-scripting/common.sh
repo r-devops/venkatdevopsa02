@@ -94,14 +94,8 @@ NODEJS() {
 
 }
 
-JAVA() {
+#JAVA() {}
 
-}
+#PYTHON() {}
 
-PYTHON() {
-
-}
-
-GOLANG() {
-
-}
+#GOLANG() {}
