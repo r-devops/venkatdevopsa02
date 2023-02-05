@@ -133,4 +133,26 @@ PYTHON() {
 
 }
 
-#GOLANG() {}
+GOLANG() {
+
+    echo " Installing golang "
+    yum install golang -y &>>${LOG_FILE}
+    Statuscheck $?
+
+    APP_PREREQ
+
+    echo " Installing the dependencies "
+    cd /home/roboshop
+    cd ${COMPONENT}
+    cd /home/${COMPONENT}/dispatch
+    go mod init dispatch &>>${LOG_FILE}
+    Statuscheck $?
+
+    echo "Doing the golang build"
+    go get 
+    go build &>>${LOG_FILE}
+    Statuscheck $?
+
+    SYSTEMD_SETUP
+
+}
