@@ -21,7 +21,7 @@ LOG_FILE=/tmp/${COMPONENT}
 source ./common.sh 
 
 echo " Install Redis repo on CentOS-8"
-dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y &>>$LOG_FILE
+dnf install https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y --skip-broken &>>$LOG_FILE
 Statuscheck $?
 
 echo " Install Redis on CentOS-8"
