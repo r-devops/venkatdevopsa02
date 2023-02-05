@@ -19,10 +19,15 @@ Statuscheck $?
 systemctl start rabbitmq-server &>>$LOG_FILE
 Statuscheck $?
 
+rabbitmqctl list_users | grep -i roboshop &>>$LOG_FILE
+if [ $? ne 0 ]; then 
+    echo "adding roboshop user to rabbitmq"
+    rabbitmqctl add_user roboshop roboshop123 &>>$LOG_FILE
+    Statuscheck $?
+fi
 
-# RabbitMQ comes with a default username / password as `guest`/`guest`. But this user cannot be used to connect. Hence we need to create one user for the application.
-
-# 1. Create application user
-# # rabbitmqctl add_user roboshop roboshop123
-# # rabbitmqctl set_user_tags roboshop administrator
-# # rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
+echo " set roboshop user in rabbitmq as administrator"
+rabbitmqctl set_user_tags roboshop administrator &>>$LOG_FILE
+Statuscheck $?
+rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*" &>>$LOG_FILE
+Statuscheck $?
