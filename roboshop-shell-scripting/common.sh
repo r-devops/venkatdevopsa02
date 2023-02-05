@@ -124,7 +124,7 @@ PYTHON() {
     echo " Installing the dependencies "
     cd /home/roboshop
     cd ${COMPONENT}
-    cd /home/${COMPONENT}/payment 
+    #cd /home/${COMPONENT}/ 
     pip3 install -r requirements.txt &>>${LOG_FILE}
     Statuscheck $?
 
@@ -144,7 +144,7 @@ GOLANG() {
     echo " Installing the dependencies "
     cd /home/roboshop
     cd ${COMPONENT}
-    cd /home/${COMPONENT}/dispatch
+    #cd /home/${COMPONENT}/
     go mod init dispatch &>>${LOG_FILE}
     Statuscheck $?
 
