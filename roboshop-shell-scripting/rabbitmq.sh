@@ -8,6 +8,9 @@ echo "Down the repo for Rabbitmq"
 curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/script.rpm.sh | sudo bash &>>$LOG_FILE
 Statuscheck $?
 
+echo "Stop Rabbitmq service"
+systemctl stop rabbitmq-server &>>$LOG_FILE
+Statuscheck $?
 
 echo "Install the Rabbitmq"
 yum install rabbitmq-server -y &>>$LOG_FILE
