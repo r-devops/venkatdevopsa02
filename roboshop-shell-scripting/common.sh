@@ -113,6 +113,24 @@ MAVEN() {
 
 }
 
-#PYTHON() {}
+PYTHON() {
+
+    echo " Installing Python on the VM "
+    yum install python36 gcc python3-devel -y  &>>${LOG_FILE}
+    Statuscheck $?
+
+    APP_PREREQ
+
+    echo " Installing the dependencies "
+    cd /home/roboshop
+    cd ${COMPONENT}
+    cd /home/${COMPONENT}/payment 
+    pip3 install -r requirements.txt &>>${LOG_FILE}
+    Statuscheck $?
+
+    SYSTEMD_SETUP
+
+
+}
 
 #GOLANG() {}
