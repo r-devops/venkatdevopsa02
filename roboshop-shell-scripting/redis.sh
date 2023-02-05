@@ -29,6 +29,10 @@ dnf module enable redis:remi-6.2 -y
 yum install redis -y &>>$LOG_FILE
 Statuscheck $?
 
+echo "stopping  redis "
+systemctl stop redis &>>$LOG_FILE
+Statuscheck $?
+
 echo "Update the bind from 127.0.0.1 to 0.0.0.0"
 sed 's/127.0.0.1/0.0.0.0/' /etc/redis.conf &>>$LOG_FILE
 Statuscheck $?
