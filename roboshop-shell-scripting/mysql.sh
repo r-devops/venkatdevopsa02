@@ -53,6 +53,8 @@ fi
 echo " cleanup before installation"
 rm -rf /tmp/mysql.zip &>>$LOG_FILE
 Statuscheck $?
+rm -rf /tmp/mysql-main &>>$LOG_FILE
+Statuscheck $?
 
 echo "download the database"
 curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>$LOG_FILE
