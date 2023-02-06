@@ -1,10 +1,10 @@
 COMPONENT=mysql 
 LOG_FILE=/tmp/${COMPONENT}
 
-echo $1
-sleep 15 
-echo $#
-sleep 15 
+# echo $1
+# sleep 15 
+# echo $#
+# sleep 15 
 
 if [ $# -eq 0 ]
 then 
