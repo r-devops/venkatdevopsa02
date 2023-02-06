@@ -1,68 +1,60 @@
-On Centos-8
+COMPONENT=mysql 
+LOG_FILE=/tmp/${COMPONENT}
 
-```bash
-# curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo
-# dnf module disable mysql
-```
+if [ $# -eq 0]
+then 
+    echo " you need to pass the password of mysql to the script"
+    echo " exiting the script"
+    exit 1
+fi 
 
-1. Install MySQL
 
-```bash
-# yum install mysql-community-server -y
-```
 
-1. Start MySQL.
+source ./common.sh 
 
-```bash
-# systemctl enable mysqld 
-# systemctl start mysqld
-```
+echo "setup the repo for mysql"
+curl -s -L -o /etc/yum.repos.d/mysql.repo https://raw.githubusercontent.com/roboshop-devops-project/mysql/main/mysql.repo  &>>$LOG_FILE
+Statuscheck $?
+dnf module disable mysql
 
-1. Now a default root password will be generated and given in the log file.
+echo "Install MySQL "
+yum install mysql-community-server -y  &>>$LOG_FILE
+Statuscheck $?
 
-```bash
-# grep temp /var/log/mysqld.log
-```
 
-1. Next, We need to change the default root password in order to start using the database service. Use password `RoboShop@1` or any other as per your choice. Rest of the options you can choose `No`
+echo " Enable & Start MySQL"
+systemctl enable mysqld   &>>$LOG_FILE
+Statuscheck $?
+systemctl start mysqld  &>>$LOG_FILE
+Statuscheck $?
 
-```bash
-# mysql_secure_installation
-```
 
-1. You can check the new password working or not using the following command in MySQL
+DEFAULT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | cut -d " " -f 11)
 
-First lets connect to MySQL
 
-```bash
-# mysql -uroot -pRoboShop@1
-```
+ echo " ALTER USER 'root'@'localhost' IDENTIFIED BY '$1';
+FLUSH PRIVILEGES; " > /tmp/set-root-passwd.sql
 
-Once after login to MySQL prompt then run this SQL Command.
 
-```sql
-> uninstall plugin validate_password;
-```
+echo "show databases;" | mysql -uroot -p${DEFAULT_PASSWORD}
+if [ $? -eq 0 ]; then 
+echo " change the default password"
+mysql -uroot -p${DEFAULT_PASSWORD} < /tmp/set-root-passwd.sql &>>$LOG_FILE
+Statuscheck $?
+echo " uninstall plugin validate_password; " | mysql -uroot -p$1 &>>$LOG_FILE
+Statuscheck $?
+fi 
 
-## **Setup Needed for Application.**
+echo " cleanup before installation"
+rm -rf /tmp/mysql.zip &>>$LOG_FILE
+Statuscheck $?
 
-As per the architecture diagram, MySQL is needed by
+echo "download the database"
+curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip" &>>$LOG_FILE
+Statuscheck $?
 
-- Shipping Service
-
-So we need to load that schema into the database, So those applications will detect them and run accordingly.
-
-To download schema, Use the following command
-
-```bash
-# curl -s -L -o /tmp/mysql.zip "https://github.com/roboshop-devops-project/mysql/archive/main.zip"
-```
-
-Load the schema for Services.
-
-```bash
-# cd /tmp
-# unzip mysql.zip
-# cd mysql-main
-# mysql -u root -pRoboShop@1 <shipping.sql
-```
+echo "Load the schema for Services"
+cd /tmp
+unzip mysql.zip
+cd mysql-main
+mysql -u root -p$1 <shipping.sql
