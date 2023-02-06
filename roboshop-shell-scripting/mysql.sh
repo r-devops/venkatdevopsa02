@@ -1,7 +1,7 @@
 COMPONENT=mysql 
 LOG_FILE=/tmp/${COMPONENT}
 
-if [ $# -eq 0]
+if [ $# -eq 0 ]
 then 
     echo " you need to pass the password of mysql to the script"
     echo " exiting the script"
