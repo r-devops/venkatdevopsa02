@@ -1,5 +1,6 @@
 COMPONENT=mysql 
 LOG_FILE=/tmp/${COMPONENT}
+source ./common.sh 
 
 # echo $1
 # sleep 15 
