@@ -26,21 +26,18 @@ Statuscheck $?
 systemctl restart mongod &>>${LOG_FILE}
 Statuscheck $?
 
-# ```
+echo "Download the schema and load it."
+rm -rf /tmp/mongodb.zip
+rm -rf /tmp/mongodb-main
+curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip" &>>${LOG_FILE}
+Statuscheck $?
 
-# ## Every Database needs the schema to be loaded for the application to work.
-
-# Download the schema and load it.
-
-# ```
-# # curl -s -L -o /tmp/mongodb.zip "https://github.com/roboshop-devops-project/mongodb/archive/main.zip"
-
-# # cd /tmp
-# # unzip mongodb.zip
-# # cd mongodb-main
-# # mongo < catalogue.js
-# # mongo < users.js
-
-# ```
-
-# Symbol `<` will take the input from a file and give that input to the command.
+echo "load the data into mongodb"
+cd /tmp
+unzip mongodb.zip &>>${LOG_FILE}
+Statuscheck $?
+cd mongodb-main
+mongo < catalogue.js &>>${LOG_FILE}
+Statuscheck $?
+mongo < users.js &>>${LOG_FILE}
+Statuscheck $?
