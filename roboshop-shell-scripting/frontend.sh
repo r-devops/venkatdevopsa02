@@ -40,7 +40,7 @@ sed -i -e '/user/ s/localhost/user.roboshop.internal/'  /etc/nginx/default.d/rob
 Statuscheck $?
 sed -i -e '/cart/ s/localhost/cart.roboshop.internal/'  /etc/nginx/default.d/roboshop.conf &>>${LOG_FILE}
 Statuscheck $?
-sed -i -e '/shipping/ s/localhost/catalogue.roboshop.internal/'  /etc/nginx/default.d/roboshop.conf &>>${LOG_FILE}
+sed -i -e '/shipping/ s/localhost/shipping.roboshop.internal/'  /etc/nginx/default.d/roboshop.conf &>>${LOG_FILE}
 Statuscheck $?
 sed -i -e '/payment/ s/localhost/payment.roboshop.internal/'  /etc/nginx/default.d/roboshop.conf &>>${LOG_FILE}
 Statuscheck $?
