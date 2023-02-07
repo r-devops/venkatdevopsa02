@@ -3,7 +3,7 @@ LOG_FILE=/tmp/${COMPONENT}
 source ./common.sh 
 
 echo "Clean up"
-yum remove nginx &>>${LOG_FILE}
+yum remove  -y nginx &>>${LOG_FILE}
 Statuscheck $?
 rm -rf /etc/nginx &>>${LOG_FILE}
 Statuscheck $?
