@@ -1,4 +1,4 @@
-COMPONENT=mysql 
+COMPONENT=mongodb 
 LOG_FILE=/tmp/${COMPONENT}
 source ./common.sh 
 
