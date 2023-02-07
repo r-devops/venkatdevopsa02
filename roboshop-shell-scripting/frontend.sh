@@ -45,11 +45,7 @@ Statuscheck $?
 sed -i -e '/payment/ s/localhost/payment.roboshop.internal/'  /etc/nginx/default.d/roboshop.conf &>>${LOG_FILE}
 Statuscheck $?
 
-sed -i -e '/catalogue/ s/localhost/catalogue.roboshop.internal/' roboshop.conf    
-
-# ```
-
-# Finally restart the service once to effect the changes.
+echo "Finally restart the service once to effect the changes"
 
 systemctl restart nginx &>>${LOG_FILE}
 Statuscheck $?
