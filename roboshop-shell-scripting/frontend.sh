@@ -32,7 +32,16 @@ mv frontend-main/localhost.conf /etc/nginx/default.d/roboshop.conf  &>>${LOG_FIL
 Statuscheck $?
 
 
-/etc/nginx/default.d/roboshop.conf
+
+echo " Updating the systemD service file with DNS name"
+sed -i -e '/catalogue/ s/localhost/catalogue.roboshop.internal/'  /etc/nginx/default.d/roboshop.conf &>>${LOG_FILE}
+sed -i -e '/user/ s/localhost/user.roboshop.internal/'  /etc/nginx/default.d/roboshop.conf &>>${LOG_FILE}
+sed -i -e '/cart/ s/localhost/cart.roboshop.internal/'  /etc/nginx/default.d/roboshop.conf &>>${LOG_FILE}
+sed -i -e '/shipping/ s/localhost/catalogue.roboshop.internal/'  /etc/nginx/default.d/roboshop.conf &>>${LOG_FILE}
+sed -i -e '/payment/ s/localhost/payment.roboshop.internal/'  /etc/nginx/default.d/roboshop.conf &>>${LOG_FILE}
+Statuscheck $?
+
+sed -i -e '/catalogue/ s/localhost/catalogue.roboshop.internal/' roboshop.conf    
 
 # ```
 
