@@ -42,10 +42,10 @@ DEFAULT_PASSWORD=$(grep 'A temporary password' /var/log/mysqld.log | cut -d " " 
 FLUSH PRIVILEGES; " > /tmp/set-root-passwd.sql
 
 
-echo "show databases;" | mysql -uroot -p${DEFAULT_PASSWORD}
-if [ $? -eq 0 ]; then 
+echo "show databases;" | mysql --connect-expired-password -uroot -p${DEFAULT_PASSWORD}
+if [ $? -ne 0 ]; then 
 echo " change the default password"
-mysql -uroot -p${DEFAULT_PASSWORD} < /tmp/set-root-passwd.sql &>>$LOG_FILE
+mysql --connect-expired-password -uroot -p${DEFAULT_PASSWORD} < /tmp/set-root-passwd.sql &>>$LOG_FILE
 Statuscheck $?
 echo " uninstall plugin validate_password; " | mysql -uroot -p$1 &>>$LOG_FILE
 Statuscheck $?
