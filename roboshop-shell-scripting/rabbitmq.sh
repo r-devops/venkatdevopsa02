@@ -9,8 +9,9 @@ curl -s https://packagecloud.io/install/repositories/rabbitmq/rabbitmq-server/sc
 Statuscheck $?
 
 echo "Stop Rabbitmq service"
-systemctl stop rabbitmq-server &>>$LOG_FILE
-Statuscheck $?
+systemctl stop rabbitmq-server 
+#&>>$LOG_FILE
+#Statuscheck $?
 
 echo "Install the Rabbitmq"
 yum install rabbitmq-server -y &>>$LOG_FILE
