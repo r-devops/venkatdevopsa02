@@ -21,7 +21,7 @@ Statuscheck $?
 
 
 echo "Update Listen IP address from 127.0.0.1 to 0.0.0.0 in config file"
-sed 's/127.0.0.1/0.0.0.0/'  /etc/mongod.conf &>>${LOG_FILE}
+sed -i -e 's/127.0.0.1/0.0.0.0/'  /etc/mongod.conf &>>${LOG_FILE}
 Statuscheck $?
 systemctl restart mongod &>>${LOG_FILE}
 Statuscheck $?
