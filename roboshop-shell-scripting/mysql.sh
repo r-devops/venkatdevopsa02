@@ -65,4 +65,6 @@ echo "Load the schema for Services"
 cd /tmp
 unzip mysql.zip
 cd mysql-main
-mysql -uroot -p$1 <shipping.sql
+mysql -uroot -p$1 <shipping.sql  &>>$LOG_FILE
+Statuscheck $?
+
