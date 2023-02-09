@@ -14,7 +14,7 @@ systemctl stop rabbitmq-server
 #Statuscheck $?
 
 echo "Install the Rabbitmq"
-yum install rabbitmq-server -y &>>$LOG_FILE
+yum install rabbitmq-server -y --skip-broken &>>$LOG_FILE
 Statuscheck $?
 
 echo "Enable and start the Rabbitmq service"
